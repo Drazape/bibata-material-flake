@@ -1,17 +1,52 @@
-{ inputs, pkgs, lib, ... }: pkgs.stdenvNoCC.mkDerivation {
-	name = "bibata-material-cursors";
-	src = inputs.bibata-material-cursors;
+{
+	inputs,
+	pkgs,
+	lib,
+	variants ? [
+		"Apricot"
+		"Beige"
+		"Blush"
+		"Brown"
+		"Charcoal"
+		"Cloud"
+		"Deep-Blue"
+		"Grey"
+		"Ice-Blue"
+		"Lilac"
+		"Lime"
+		"Midnight"
+		"Mint"
+		"Moss"
+		"Noir"
+		"Peach"
+		"Pink-Pastel"
+		"Pink-Rose"
+		"Sage"
+		"Salmon"
+		"Sand"
+		"Seafoam"
+		"Sky-Blue"
+		"Slate"
+		"Soft-Blue"
+		"Sunset"
+		"Teal"
+		"Violet"
+	], ... }: pkgs.stdenvNoCC.mkDerivation {
+		name = "bibata-material-cursors";
+		src = inputs.bibata-material-cursors;
 
-	installPhase = ''
-		install_path=$out/share/icons
-		${lib.getExe' pkgs.coreutils "mkdir"} --parents -- $install_path
-		${lib.getExe' pkgs.coreutils "cp"} --recursive --no-target-directory -- $src $install_path
-	'';
+		installPhase = ''
+			install_path=$out/share/icons/
+			${lib.getExe' pkgs.coreutils "mkdir"} --parents -- $install_path
+			for variant in ${builtins.concatStringsSep " " variants}
+				do ${lib.getExe' pkgs.coreutils "cp"} --recursive -- $src/Bibata-Material-$variant/ $install_path
+			done
+		'';
 
-	meta = {
-		description = "28 Bibata cursor themes, colored using Material Design 3's tonal system";
-		homepage = "https://github.com/SakibShahariar/bibata-material-cursors";
-		license = lib.licenses.gpl3;
-		platforms = lib.platforms.linux;
-	};
+		meta = {
+			description = "28 Bibata cursor themes, colored using Material Design 3's tonal system";
+			homepage = "https://github.com/SakibShahariar/bibata-material-cursors";
+			license = lib.licenses.gpl3;
+			platforms = lib.platforms.linux;
+		};
 }
