@@ -31,15 +31,17 @@
 		"Sunset"
 		"Teal"
 		"Violet"
-	], ... }: pkgs.stdenvNoCC.mkDerivation {
+	],
+	theme ? "Light",
+	... }: pkgs.stdenvNoCC.mkDerivation {
 		name = "bibata-material-cursors";
-		src = inputs.bibata-material-cursors;
+		src = inputs.${"bibata-material-cursors-"+theme};
 
 		installPhase = ''
 			install_path=$out/share/icons/
 			${lib.getExe' pkgs.coreutils "mkdir"} --parents -- $install_path
 			for variant in ${builtins.concatStringsSep " " variants}
-				do ${lib.getExe' pkgs.coreutils "cp"} --recursive -- $src/Bibata-Material-$variant/ $install_path
+				do ${lib.getExe' pkgs.coreutils "cp"} --recursive -- $src/Bibata-Material-$variant-$theme/ $install_path
 			done
 		'';
 

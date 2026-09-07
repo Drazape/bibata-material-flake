@@ -4,8 +4,12 @@
 	inputs = {
 		flake-parts = { type="github"; owner="hercules-ci"; repo="flake-parts"; };
 		nixpkgs = { type="github"; owner="NixOS"; repo="nixpkgs"; ref="nixpkgs-unstable"; };
-		bibata-material-cursors = {
-			url = "https://github.com/SakibShahariar/material-bibata-cursor/releases/download/v1.0.0/bibata-material-v1.0.0.tar.gz";
+		bibata-material-cursors-Light = {
+			url = "https://github.com/SakibShahariar/material-bibata-cursor/releases/download/v1.3.0/bibata-material-light-v1.3.0.tar.gz";
+			flake = false;
+		};
+		bibata-material-cursors-Dark = {
+			url = "https://github.com/SakibShahariar/material-bibata-cursor/releases/download/v1.3.0/bibata-material-dark-v1.3.0.tar.gz";
 			flake = false;
 		};
 	};
